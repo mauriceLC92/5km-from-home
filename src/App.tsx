@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Map } from './components/Map'
+import { MapLoading } from './components/MapLoading';
 
 function App() {
   const [latitude, setLatitude] = useState(0);
@@ -19,6 +20,7 @@ function App() {
   else {
     console.log('geolocation is not enabled on this browser')
   }
+  const hasLngAndLat = latitude && longitude;
   return (
     <div>
       <header className="App-header">
@@ -30,23 +32,23 @@ function App() {
           </div>
           <div className='w-8/12'>
           <p className="text-xl leading-tight tracking-wide mb-4">
-            The South African government has allowed walking or jogging between 6am and 9am.
+            The South African government has allowed walking, jogging and cycling between <span className='font-bold'>6am and 9am.</span>
           </p>
           </div>
           <div className='w-8/12'>
           <p className="text-xl leading-tight tracking-wide mb-4">
-          Allow access to location and see where your 5km radius ends.
+          Stay home. Stay safe <span className='text-xl' role="img" aria-label="map">😷</span>
           </p>
           </div>
         </div>
       </header>
 
       <main className='flex justify-center'>
-        <div style={{ height: '70vh', width: '70%' }} className='border-gray-700 border-solid border-4 shadow-lg rounded-lg'>
+        <div style={{ height: '70vh', width: '70%' }} className='border-gray-700 border-solid border-4 shadow-lg rounded-lg flex items-center justify-center'>
           {
-            latitude && longitude ?
+            hasLngAndLat ?
             <Map zoom={12} lng={longitude} lat={latitude}/>
-            : <div>Loading....</div>
+            : <MapLoading />
           }
         </div>
       </main>
