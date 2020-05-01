@@ -21,10 +21,8 @@ export const Map: React.FunctionComponent<MapProps> = ({ lat, lng, zoom }) => {
   return (
     <div style={{ height: '70vh', width: '100%' }}>
       <GoogleMapReact
-        // options={mapOptions}
         bootstrapURLKeys={{
           key: `${process.env.REACT_APP_GOOGLE_API_KEY}`,
-          // key: 'AIzaSyAJm3S6KrORl1icgUTuVaVsQoFDEWRG-aQ',
           language: 'en'
         }}
         defaultCenter={{
@@ -32,7 +30,21 @@ export const Map: React.FunctionComponent<MapProps> = ({ lat, lng, zoom }) => {
           lng
         }}
         defaultZoom={zoom}
-        onGoogleApiLoaded={({ map, maps }) => renderMarkers(map, maps)}
+        onGoogleApiLoaded={({ map, maps }) => {
+          return (
+            new maps.Circle({
+              strokeColor: '#FF0000',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: '#FF0000',
+              fillOpacity: 0.3,
+              map,
+              center: {lat, lng},
+              radius: 275,
+            }),
+            renderMarkers(map, maps)
+          )
+        }}
       />
     </div>
   )

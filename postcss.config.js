@@ -1,3 +1,4 @@
+require('dotenv').config()
 // postcss.config.js
 const purgecss = require('@fullhuman/postcss-purgecss')({
 
