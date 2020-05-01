@@ -28,16 +28,21 @@ function App() {
               5km From Home
             </h1>
           </div>
-          <div>
-          <p className="text-2xl leading-tight tracking-wide">
-            Search for your location below
+          <div className='w-8/12'>
+          <p className="text-xl leading-tight tracking-wide mb-4">
+            The South African government has allowed walking or jogging between 6am and 9am.
+          </p>
+          </div>
+          <div className='w-8/12'>
+          <p className="text-xl leading-tight tracking-wide mb-4">
+          Allow access to location and see where your 5km radius ends.
           </p>
           </div>
         </div>
       </header>
 
       <main className='flex justify-center'>
-        <div style={{ height: '70vh', width: '70%' }}>
+        <div style={{ height: '70vh', width: '70%' }} className='border-gray-700 border-solid border-4 shadow-lg rounded-lg'>
           {
             latitude && longitude ?
             <Map zoom={12} lng={longitude} lat={latitude}/>
