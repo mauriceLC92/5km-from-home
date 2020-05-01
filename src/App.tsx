@@ -26,7 +26,7 @@ function App() {
       <header className="App-header">
         <div className='bg-gray-300 flex justify-center flex-col items-center'>
           <div>
-            <h1 className='text-6xl'>
+            <h1 className='text-6xl text-center'>
               5km From Home
             </h1>
           </div>
