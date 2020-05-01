@@ -425,6 +425,10 @@ img {
   font-weight: 700;
 }
 
+.text-xs {
+  font-size: 0.75rem;
+}
+
 .text-xl {
   font-size: 1.25rem;
 }
@@ -439,6 +443,10 @@ img {
 
 .mb-4 {
   margin-bottom: 1rem;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
 }
 
 .p-4 {

@@ -5,7 +5,8 @@ import { MapLoading } from './components/MapLoading';
 function App() {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
-  function displayLocationInfo(position: any) {
+
+  const displayLocationInfo = (position: any) => {
     const lng = position.coords.longitude;
     const lat = position.coords.latitude;
     setLatitude(lat)
@@ -27,18 +28,19 @@ function App() {
         <div className='bg-gray-300 flex justify-center flex-col items-center'>
           <div>
             <h1 className='text-6xl text-center'>
-              5km From Home
+              5km From Home{' '} 
+              <span className='text-6xl' role="img" aria-label="map">🇿🇦</span>
             </h1>
           </div>
           <div className='w-8/12'>
-          <p className="text-xl leading-tight tracking-wide mb-4">
-            The South African government has allowed walking, jogging and cycling between <span className='font-bold'>6am and 9am.</span>
-          </p>
+            <p className="text-xl leading-tight tracking-wide mb-4">
+              The South African government has allowed walking, jogging and cycling between <span className='font-bold'>6am and 9am.</span>
+            </p>
           </div>
           <div className='w-8/12'>
-          <p className="text-xl leading-tight tracking-wide mb-4">
-          Stay home. Stay safe <span className='text-xl' role="img" aria-label="map">😷</span>
-          </p>
+            <p className="text-xl leading-tight tracking-wide mb-4">
+              Stay home. Stay safe <span className='text-xl' role="img" aria-label="map">😷</span>
+            </p>
           </div>
         </div>
       </header>
@@ -47,11 +49,16 @@ function App() {
         <div style={{ height: '70vh', width: '70%' }} className='border-gray-700 border-solid border-4 shadow-lg rounded-lg flex items-center justify-center'>
           {
             hasLngAndLat ?
-            <Map zoom={12} lng={longitude} lat={latitude}/>
-            : <MapLoading />
+              <Map zoom={12} lng={longitude} lat={latitude} />
+              : <MapLoading />
           }
         </div>
       </main>
+      <footer className='flex justify-center mt-10'>
+        <p className='text-xs'>
+          Made with lockdown in mind <span className='text-xl' role="img" aria-label="map">🔒</span> &copy; 2020
+          </p>
+      </footer>
     </div>
   );
 }

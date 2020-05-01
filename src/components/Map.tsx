@@ -51,7 +51,6 @@ export const Map: React.FunctionComponent<MapProps> = ({ lat, lng, zoom }) => {
       draggable={draggable}
       defaultZoom={zoom}
       onGoogleApiLoaded={({ map, maps }) => {
-        console.log(maps)
         return (
           renderRadius(map, maps),
           renderMarker(map, maps)
