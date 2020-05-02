@@ -2,10 +2,21 @@ import React, { useState } from 'react';
 import { Map } from './components/Map'
 import { MapLoading } from './components/MapLoading';
 
+export interface MapOnClick {
+  event: any;
+  lat: number;
+  lng: number;
+  x: number;
+  y: number;
+}
 function App() {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
 
+  const test = (params: MapOnClick) => {
+    setLatitude(params.lat)
+    setLongitude(params.lng)
+  }
   const displayLocationInfo = (position: any) => {
     const lng = position.coords.longitude;
     const lat = position.coords.latitude;
@@ -49,7 +60,7 @@ function App() {
         <div style={{ height: '70vh', width: '70%' }} className='border-gray-700 border-solid border-4 shadow-lg rounded-lg flex items-center justify-center'>
           {
             hasLngAndLat ?
-              <Map zoom={12} lng={longitude} lat={latitude} />
+              <Map zoom={12} lng={longitude} lat={latitude} test={test}/>
               : <MapLoading />
           }
         </div>

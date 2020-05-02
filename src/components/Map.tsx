@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react'
+import { MapOnClick } from '../App';
 require('dotenv').config()
 interface MapProps {
   lat: number,
   lng: number,
-  zoom: number
+  zoom: number,
+  test: (params: MapOnClick) => void;
 }
 
-export const Map: React.FunctionComponent<MapProps> = ({ lat, lng, zoom }) => {
-  const [draggable, ] = useState(true);
-  const [latitude, setLatitude] = useState(lat);
-  const [longitude, setLongitude] = useState(lng);
-
+export const Map: React.FunctionComponent<MapProps> = ({ lat, lng, zoom, test }) => {
   const renderMarker = (map: any, maps: any) => {
     const marker = new maps.Marker({
-      position: { lat: latitude, lng: longitude },
+      position: { lat, lng },
       map,
       title: 'Your Home',
-      draggable,
+      draggable: true,
     });
 
     return marker;
@@ -31,7 +29,7 @@ export const Map: React.FunctionComponent<MapProps> = ({ lat, lng, zoom }) => {
       fillColor: '#FF0000',
       fillOpacity: 0.3,
       map,
-      center: { lat: latitude, lng: longitude },
+      center: { lat, lng },
       radius: 4000,
     });
     return circle
@@ -39,16 +37,17 @@ export const Map: React.FunctionComponent<MapProps> = ({ lat, lng, zoom }) => {
 
   return (
     <GoogleMapReact
+      key={lat}
       bootstrapURLKeys={{
         key: `${process.env.REACT_APP_GOOGLE_API_KEY}`,
         language: 'en'
       }}
       defaultCenter={{
-        lat: latitude,
-        lng: longitude
+        lat,
+        lng
       }}
       yesIWantToUseGoogleMapApiInternals
-      draggable={draggable}
+      draggable={true}
       defaultZoom={zoom}
       onGoogleApiLoaded={({ map, maps }) => {
         return (
@@ -57,8 +56,7 @@ export const Map: React.FunctionComponent<MapProps> = ({ lat, lng, zoom }) => {
         )
       }}
       onClick={(value) => {
-        setLatitude(value.lat)
-        setLongitude(value.lng)
+        test(value)
       }}
     />
   )
